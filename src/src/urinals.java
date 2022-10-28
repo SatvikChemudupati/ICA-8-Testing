@@ -8,8 +8,10 @@
 public class urinals {
 
     public static boolean goodString( String str ) {
-        System.out.println ("====== Satvik Chemudupati == TEST ONE EXECUTED =======");
-        return true;
+        System.out.println("====== Satvik Chemudupati == TEST TWO EXECUTED =======");
+        if( str.matches("\"^[01]+$\""))
+            return true;
+        return false;
     }
 
 

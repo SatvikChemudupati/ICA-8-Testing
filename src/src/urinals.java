@@ -13,7 +13,7 @@ public class urinals {
             return (str.matches("[0-1]+"));
     }
 
-    static int count_method(String str1){
+    public static int count_method(String str1){
 
         int str_length = str1.length();
         char[] chars = str1.toCharArray();
@@ -97,10 +97,14 @@ public class urinals {
         }
         else if (selection == 2) {
             // file input
-            File resourceFile = new File("input.dat");
+            File resourceFile = new File("urinal.dat");
             if (resourceFile.exists() && !resourceFile.isDirectory()) {
                 System.out.println("Input File exists");
                 BufferedReader reader1 = new BufferedReader(new FileReader(resourceFile));
+                if (reader1.readLine() == null) {
+                    System.out.println("File empty");
+                    return;
+                }
                 StringBuilder stringBuilder = new StringBuilder();
                 String line;
                 String ls = System.getProperty("line.separator");
@@ -113,9 +117,10 @@ public class urinals {
                 String sbString = stringBuilder.toString();
                 String error_string = "-1";
                 // checks the file for -1/EOF/null
-                if (sbString.substring(0, sbString.length() - 1).equals(error_string))
+                String sub_string = sbString.substring(0, sbString.length() - 1);
+                if (sub_string.equals(error_string))
                 {
-                    System.out.println("Input file is null/-1/EOF");
+                    System.out.println("Input file is Null/-1/EOF");
                     return;
                 }
                 String[] ary = sbString.split("\n");

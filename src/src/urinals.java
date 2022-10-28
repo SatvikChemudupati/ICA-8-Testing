@@ -20,7 +20,7 @@ public class urinals {
         int count = 0;
         int i;
         for (i = 0; i < str_length - 1; i++){
-
+        // checks for adjacent 1's in the string
             if (chars[i] == '1') {
                 if (i >= 1) {
                     if (chars[i + 1] == '1' || chars[i - 1] == '1') {
@@ -53,7 +53,7 @@ public class urinals {
                 }
             }
         }
-
+        // check the last element in the string
         if (i+1 == str_length && chars[i-1] == '1'){
             return count;
         }
@@ -74,13 +74,13 @@ public class urinals {
 
         Scanner sc = new Scanner(System.in);
         String str1;
-
         System.out.println("Welcome!");
         System.out.println("Please select the mode of input:");
         System.out.println("1. Input text from keyboard \n2. Input text fom file \n");
         int selection = sc.nextInt();
         if (selection == 1)
         {
+            // input from the keyboard
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             System.out.println("Please enter the string:");
             str1 = reader.readLine();
@@ -96,6 +96,7 @@ public class urinals {
             }
         }
         else if (selection == 2) {
+            // file input
             File resourceFile = new File("input.dat");
             if (resourceFile.exists() && !resourceFile.isDirectory()) {
                 System.out.println("Input File exists");
@@ -110,11 +111,19 @@ public class urinals {
                 stringBuilder.deleteCharAt(stringBuilder.length() - 1);
                 reader1.close();
                 String sbString = stringBuilder.toString();
+                String error_string = "-1";
+                // checks the file for -1/EOF/null
+                if (sbString.substring(0, sbString.length() - 1).equals(error_string))
+                {
+                    System.out.println("Input file is null/-1/EOF");
+                    return;
+                }
                 String[] ary = sbString.split("\n");
                 String[] counter = new String[ary.length];
                 for(int i = 0; i < ary.length; i++){
                     str1 = ary[i];
                     str1 = str1.substring(0, str1.length() - 1);
+                    //check if the string is a good string
                     if (goodString(str1)) {
                         boolean result = str1.matches("[0-1]+");
                         if (result) {
